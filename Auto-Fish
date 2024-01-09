@@ -1,17 +1,21 @@
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Extras/Global"))()
-VG.DisableConnection(Error)
-VG.DisableConnection(Idled)
 spawn(function()
-    while AutoFish do wait()
+    while wait() and Test do
         pcall(function()
-            local Fish = require(ReplicatedStorage["_replicationFolder"].FishingClient)
-            local StartCasting = Fish.StartCasting
-            local Click = Fish.Click
-            StartCasting(Fish, StartCasting)
-            if Fish.Snagged == true then
-                Fish.ReelSignal:Fire()
-                if Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.PointerLabel.Position.X.Scale <= Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.SafeBarLabel.Position.X.Scale + .02 then
-                    Click(Fish, Fish.Click)
+            if Player.PlayerGui.FishingGui.ContainerFrame.Visible then
+                local Fish = require(ReplicatedStorage["_replicationFolder"].FishingClient)
+                local StartCasting = Fish.StartCasting
+                local No = Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.SpinRingFrame.SpinSmallSegment
+                local Yes = Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.SpinReelLabel
+                local Bad = Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.SpinRingFrame.SpinLargeSegment
+                local Click = Fish.Click
+                StartCasting(Fish, StartCasting)
+                if Fish.Snagged == true then
+                    Fish.ReelSignal:Fire()
+                    if Yes.AbsoluteRotation >= No.AbsoluteRotation - 3 and Yes.AbsoluteRotation <= Bad.AbsoluteRotation then
+                        Click(Fish, Fish.Click)
+                    end
                 end
             end
         end)
