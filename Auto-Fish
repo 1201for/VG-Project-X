@@ -1,4 +1,6 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Extras/Global"))()
+VG.DisableConnection(Error)
+VG.DisableConnection(Idled)
 spawn(function()
     while AutoFish do wait()
         pcall(function()
