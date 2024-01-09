@@ -1,0 +1,17 @@
+    AutoFish = A
+    spawn(function()
+        while AutoFish do wait()
+            pcall(function()
+                local Fish = require(ReplicatedStorage["_replicationFolder"].FishingClient)
+                local StartCasting = Fish.StartCasting
+                local Click = Fish.Click
+                StartCasting(Fish, StartCasting)
+                if Fish.Snagged == true then
+                    Fish.ReelSignal:Fire()
+                    if Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.PointerLabel.Position.X.Scale <= Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.SafeBarLabel.Position.X.Scale + .02 then
+                        Click(Fish, Fish.Click)
+                    end
+                end
+            end)
+        end
+    end)
